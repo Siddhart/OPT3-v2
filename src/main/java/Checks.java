@@ -6,11 +6,11 @@ import java.util.regex.Pattern;
 
 public class Checks {
 
-    public static boolean checkProject(String start, String end, ArrayList<Klant> klanten, int klantID,ArrayList<Medewerker> medewerkers, int medewerkerID){
+    public boolean checkProject(String start, String end, ArrayList<Klant> klanten, int klantID,ArrayList<Medewerker> medewerkers, int medewerkerID){
         return (CheckDate(start, end) && checkKlant(klanten, klantID) != null && checkMedewerker(medewerkers, medewerkerID) != null);
     }
 
-    public static boolean CheckDate(String start, String end) {
+    public boolean CheckDate(String start, String end) {
         LocalDate startDate = LocalDate.parse(start, DateTimeFormatter.ISO_LOCAL_DATE);
         LocalDate endDate = LocalDate.parse(end, DateTimeFormatter.ISO_LOCAL_DATE);
 
@@ -18,7 +18,7 @@ public class Checks {
     }
 
 
-    public static String projectTag(int budget){
+    public String projectTag(int budget){
         if(budget <= 1000){
             return "klein";
         }else if(budget > 1000 && budget < 5000){
@@ -28,7 +28,7 @@ public class Checks {
         return "groot";
     }
 
-    public static Klant checkKlant(ArrayList<Klant> klanten, int klantID){
+    public Klant checkKlant(ArrayList<Klant> klanten, int klantID){
         for(Klant klant : klanten){
             if(klant.getKlantID() == klantID){
                 return klant;
@@ -37,7 +37,7 @@ public class Checks {
         return null;
     }
 
-    public static Medewerker checkMedewerker(ArrayList<Medewerker> medewerkers, int medewerkerID){
+    public Medewerker checkMedewerker(ArrayList<Medewerker> medewerkers, int medewerkerID){
         for(Medewerker medewerker : medewerkers){
             if(medewerker.getMedewerkerID() == medewerkerID){
                 return medewerker;
@@ -46,12 +46,12 @@ public class Checks {
         return null;
     }
 
-    public static boolean checkEmailEnFunctie(String emailInput, String functieInput){
+    public boolean checkEmailEnFunctie(String emailInput, String functieInput){
         return isEmail(emailInput ) && isAllLowercase(functieInput);
     }
 
 
-    public static boolean projectCheck(int budget, String startDate, String endDate, int medewerkerID, ArrayList<Medewerker> medewerkers, int klantID, ArrayList<Klant> klanten){
+    public boolean projectCheck(int budget, String startDate, String endDate, int medewerkerID, ArrayList<Medewerker> medewerkers, int klantID, ArrayList<Klant> klanten){
         if(budget <= 0) return false;
         if(Medewerker.getMedewerker(medewerkerID, medewerkers) == null) return false;
         if(Klant.getKlant(klantID, klanten) == null) return false;
@@ -60,7 +60,7 @@ public class Checks {
         return true;
     }
 
-    public static boolean isEmail(String str) {
+    public boolean isEmail(String str) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
                 "[a-zA-Z0-9_+&*-]+)*@" +
                 "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
@@ -72,7 +72,7 @@ public class Checks {
         return pattern.matcher(str).matches();
     }
 
-    public static boolean isAllLowercase(String input) {
+    public boolean isAllLowercase(String input) {
         if (input == null || input.isEmpty()) {
             return false;
         }

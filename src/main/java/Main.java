@@ -17,9 +17,9 @@ public class Main {
         ));
 
         medewerkers = new ArrayList<Medewerker>(Arrays.asList(
-                new Medewerker(4, "Medewerker een", "manager", "+31 623456789"),
-                new Medewerker(5, "Medewerker twee", "developer", "+31 634567890"),
-                new Medewerker(6, "Medewerker drie", "designer", "+31 645678901")
+                new Medewerker(4, "Medewerker een", "manager", "+31 623456789", 50),
+                new Medewerker(5, "Medewerker twee", "developer", "+31 634567890", 35),
+                new Medewerker(6, "Medewerker drie", "designer", "+31 645678901", 25)
         ));
 
         projecten = new ArrayList<Project>(Arrays.asList(
@@ -30,6 +30,14 @@ public class Main {
 
     public static void main(String[] args) {
         Main crmApplicatie = new Main();
+
+        for(Project p : crmApplicatie.projecten){
+            new ProjectObserver(p);
+        }
+
+        crmApplicatie.projecten.get(1).addUrenDeclaratie(new UrenDeclaratie(2, crmApplicatie.medewerkers.get(0)));
+        crmApplicatie.projecten.get(0).addUrenDeclaratie(new UrenDeclaratie(2, crmApplicatie.medewerkers.get(0)));
+
         crmApplicatie.start();
     }
 
@@ -62,6 +70,9 @@ public class Main {
                     toonMedewerkers();
                     break;
                 case 7:
+                    urenDeclareren();
+                    break;
+                case 8:
                     programmaActief = false;
                     break;
                 default:
@@ -80,7 +91,8 @@ public class Main {
         System.out.println("4. Klanten weergeven");
         System.out.println("5. Projecten weergeven");
         System.out.println("6. Medewerkers weergeven");
-        System.out.println("7. Afsluiten");
+        System.out.println("7. Uren Declareren");
+        System.out.println("8. Afsluiten");
     }
 
     private void voegKlantToe(Scanner scanner) {
@@ -135,6 +147,7 @@ public class Main {
         LocalDate einddatum = LocalDate.parse(einddatumStr, DateTimeFormatter.ISO_LOCAL_DATE);
 
         Project project = new Project(projectID, projectnaam, beschrijving, budget, startdatum, einddatum, klantID,medewerkerID);
+        new ProjectObserver(project);
         projecten.add(project);
         System.out.println("Project toegevoegd.");
     }
@@ -156,7 +169,10 @@ public class Main {
         System.out.println("Voer het e-mailadres in:");
         String email = scanner.nextLine();
 
-        Medewerker medewerker = new Medewerker(medewerkerID, (voornaam + " " + achternaam), functie, email);
+        System.out.println("Voer het uurtarief in:");
+        Double uurTarief = scanner.nextDouble();
+
+        Medewerker medewerker = new Medewerker(medewerkerID, (voornaam + " " + achternaam), functie, email, uurTarief);
         medewerkers.add(medewerker);
         System.out.println("Medewerker toegevoegd.");
     }
@@ -180,5 +196,10 @@ public class Main {
         for (Medewerker medewerker : medewerkers) {
             System.out.println("ID: " + medewerker.getMedewerkerID() + ", " + medewerker.getFunctie() + ", Naam: " + medewerker.getNaam() + ", E-mail: " + medewerker.getEmail());
         }
+    }
+
+    private void urenDeclareren(){
+        //TODO code hierzo toevoegen
+        //input is de medewerkerID, ProjectID en het aantal uur. Daarna toevoegen aan UrenDeclaratie in Project Class
     }
 }

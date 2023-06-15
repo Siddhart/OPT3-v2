@@ -5,15 +5,17 @@ public class Medewerker {
     private String naam;
     private String functie;
     private String email;
+    private double uurTarief;
 
 
     public Medewerker(){}
 
-    public Medewerker(int medewerkerID, String naam, String functie, String email) {
+    public Medewerker(int medewerkerID, String naam, String functie, String email, double uurTarief) {
         this.medewerkerID = medewerkerID;
         this.naam = naam;
         this.functie = functie;
         this.email = email;
+        this.uurTarief = uurTarief;
     }
 
     public int getMedewerkerID() {
@@ -46,6 +48,13 @@ public class Medewerker {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setUurTarief(double uurtarief) {
+        this.uurTarief = uurtarief;
+    }
+    public double getUurTarief() {
+        return this.uurTarief;
     }
 
     public static Medewerker getMedewerker(int medewerkerID, ArrayList<Medewerker> medewerker){
