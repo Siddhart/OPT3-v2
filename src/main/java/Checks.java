@@ -50,6 +50,20 @@ public class Checks {
         return isEmail(emailInput ) && isAllLowercase(functieInput);
     }
 
+    public boolean checkFunctie(String f){
+        return isAllLowercase(f);
+    }
+
+    public boolean checkValidDatum(String input) {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate date = LocalDate.parse(input, formatter);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 
     public boolean projectCheck(int budget, String startDate, String endDate, int medewerkerID, ArrayList<Medewerker> medewerkers, int klantID, ArrayList<Klant> klanten){
         if(budget <= 0) return false;

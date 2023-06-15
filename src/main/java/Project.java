@@ -16,7 +16,7 @@ public class Project implements Subject{
     private List<UrenDeclaratie> urenDeclaraties;
     private List<Observer> observers;
 
-    public Project(int projectID, String projectnaam, String beschrijving, int budget, LocalDate startdatum, LocalDate einddatum, int klantID, int projectManagerID) {
+    public Project(int projectID, String projectnaam, String beschrijving, double budget, LocalDate startdatum, LocalDate einddatum, int klantID, int projectManagerID) {
         this.projectID = projectID;
         this.projectnaam = projectnaam;
         this.beschrijving = beschrijving;
@@ -29,6 +29,8 @@ public class Project implements Subject{
 
         this.urenDeclaraties = new ArrayList<>();
         this.observers = new ArrayList<>();
+
+        new ProjectObserver(this);
     }
 
     public void addUrenDeclaratie(UrenDeclaratie declaratie) {

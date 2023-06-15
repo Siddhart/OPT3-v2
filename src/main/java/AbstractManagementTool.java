@@ -1,14 +1,5 @@
 import java.util.Scanner;
 
-interface PrintInterface{
-    void printMenu();
-    void printOverzicht();
-}
-
-interface WijzigInterface{
-    void toevoegen();
-    void verwijderen();
-}
 
 
 public abstract class AbstractManagementTool implements PrintInterface, WijzigInterface {
@@ -36,10 +27,15 @@ public abstract class AbstractManagementTool implements PrintInterface, WijzigIn
                 printOverzicht();
                 break;
             case 2:
-                    toevoegen();
+                toevoegen();
                 break;
             case 3:
                 verwijderen();
+                break;
+            case 4:
+                bijwerken();
+                break;
+            case 5:
                 break;
             default:
                 System.out.println("Invalid choice. Please try again.");
