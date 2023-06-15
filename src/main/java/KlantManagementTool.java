@@ -23,18 +23,13 @@ public class KlantManagementTool extends AbstractManagementTool{
         String naam = scanner.nextLine();
 
         //email quetion and check process
-        boolean checkEmail = false;
         String email = "";
 
         //if the email is not valid ask the question agian
-        while(!checkEmail){
+        while(!checker.isEmail(email)){
             System.out.print("Voer het e-mailadres in: ");
             email = scanner.nextLine();
-            if(checker.isEmail(email)){
-                checkEmail = true;
-            }
         }
-
 
         System.out.print("Voer het telefoonnummer in: ");
         String telefoonnummer = scanner.nextLine();
@@ -68,7 +63,50 @@ public class KlantManagementTool extends AbstractManagementTool{
 
     @Override
     public void bijwerken() {
+        Scanner scanner = new Scanner(System.in);
 
+        boolean checkID = false;
+        Klant klant = null;
+        while(!checkID){
+            System.out.print("Voer de Klant ID in: ");
+            int klantIdInput = scanner.nextInt();
+            scanner.nextLine();
+
+            klant = Main.klanten.stream().filter(k -> k.getKlantID() == klantIdInput).findFirst().orElse(null);
+            if(klant != null){
+                checkID = true;
+            }
+        }
+
+        ArrayList<String> opties = new ArrayList<String>();
+        opties.add("Naam");
+        opties.add("Email");
+        opties.add("Telefoonnummer");
+        Menu.generateMenu(opties);
+
+        System.out.println("Welke data wilt u wijzigen? ");
+        int userInput = scanner.nextInt();
+        scanner.nextLine();
+
+        if(userInput == 1){
+            System.out.print("Naam veranderen naar -> ");
+            String newName = scanner.nextLine();
+            klant.setNaam(newName);
+
+            System.out.println("Naam gewijzigd naar " + newName);
+        }else if(userInput == 2){
+            System.out.print("Email veranderen naar -> ");
+            String newEmail = scanner.nextLine();
+            klant.setEmail(newEmail);
+
+            System.out.println("Email gewijzigd naar " + newEmail);
+        }else if(userInput == 3){
+            System.out.print("Telefoonnummer veranderen naar -> ");
+            String newTelefoonNummer = scanner.nextLine();
+            klant.setTelefoonnummer(newTelefoonNummer);
+
+            System.out.println("Telefoonnummer gewijzigd naar " + newTelefoonNummer);
+        }
     }
 
     @Override

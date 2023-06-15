@@ -36,22 +36,16 @@ public class MedewerkerManagementTool extends AbstractManagementTool{
         }
 
         //email quetion and check process
-        boolean checkEmail = false;
         String email = "";
 
         //if the email is not valid ask the question agian
-        while(!checkEmail){
+        while(!checker.isEmail(email)){
             System.out.print("Voer het e-mailadres in: ");
             email = scanner.nextLine();
-            if(checker.isEmail(email)){
-                checkEmail = true;
-            }
         }
 
         System.out.print("Voer het uurtarief in: ");
         double uurtarief = scanner.nextDouble();
-
-
 
         Medewerker nieuweMedewerker = new Medewerker(medewerkerID, naam, functie, email, uurtarief);
         Main.medewerkers.add(nieuweMedewerker);
@@ -79,13 +73,64 @@ public class MedewerkerManagementTool extends AbstractManagementTool{
 
     @Override
     public void bijwerken() {
+        Scanner scanner = new Scanner(System.in);
 
+        boolean checkID = false;
+        Medewerker medewerker = null;
+        while(!checkID){
+            System.out.print("Voer de Medewerker ID in: ");
+            int medewerkerIdInput = scanner.nextInt();
+            scanner.nextLine();
+
+            medewerker = Main.medewerkers.stream().filter(m -> m.getMedewerkerID() == medewerkerIdInput).findFirst().orElse(null);
+            if(medewerker != null){
+                checkID = true;
+            }
+        }
+
+        ArrayList<String> opties = new ArrayList<String>();
+        opties.add("Naam");
+        opties.add("Email");
+        opties.add("Functie");
+        opties.add("Uurtarief");
+        Menu.generateMenu(opties);
+
+        System.out.println("Welke data wilt u wijzigen? ");
+        int userInput = scanner.nextInt();
+        scanner.nextLine();
+
+        if(userInput == 1){
+            System.out.print("Naam veranderen naar -> ");
+            String newName = scanner.nextLine();
+            medewerker.setNaam(newName);
+
+            System.out.println("Naam gewijzigd naar " + newName);
+        }else if(userInput == 2){
+            System.out.print("Email veranderen naar -> ");
+            String newEmail = scanner.nextLine();
+            medewerker.setEmail(newEmail);
+
+            System.out.println("Email gewijzigd naar " + newEmail);
+        }else if(userInput == 3){
+            System.out.print("Telefoonnummer veranderen naar -> ");
+            String newFunctie = scanner.nextLine();
+            medewerker.setFunctie(newFunctie);
+
+            System.out.println("Functie gewijzigd naar " + newFunctie);
+        }else if(userInput == 4){
+            System.out.print("Uurtarief veranderen naar -> ");
+            double newuurtarief = scanner.nextDouble();
+            scanner.nextLine();
+            medewerker.setUurTarief(newuurtarief);
+
+            System.out.println("Uurtarief gewijzigd naar " + newuurtarief);
+        }
     }
 
     @Override
     public void printOverzicht() {
         for(Medewerker medewerker: Main.medewerkers){
-            System.out.println("(ID " + medewerker.getMedewerkerID() + ") " + medewerker.getNaam() + " | " + medewerker.getFunctie() + " | " + medewerker.getEmail());
+            System.out.println("(ID " + medewerker.getMedewerkerID() + ") " + medewerker.getNaam() + " | " + medewerker.getFunctie() + " | " + medewerker.getEmail() + " | " + String.format("€%.2f/uur", medewerker.getUurTarief()));
         }
     }
 }

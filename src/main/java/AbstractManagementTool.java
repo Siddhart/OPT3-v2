@@ -38,8 +38,8 @@ public abstract class AbstractManagementTool implements PrintInterface, WijzigIn
             case 5:
                 break;
             default:
-                System.out.println("Invalid choice. Please try again.");
-                voerGekozenOptieUit(-1);
+                krijgGebruikerInput();
+                break;
         }
     }
 }

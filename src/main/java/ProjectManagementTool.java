@@ -92,7 +92,51 @@ public class ProjectManagementTool extends AbstractManagementTool{
 
     @Override
     public void bijwerken() {
+        Scanner scanner = new Scanner(System.in);
 
+        boolean checkID = false;
+        Project project = null;
+        while(!checkID){
+            System.out.print("Voer het Project ID in: ");
+            int projectIdInput = scanner.nextInt();
+            scanner.nextLine();
+
+            project = Main.projecten.stream().filter(p -> p.getKlantID() == projectIdInput).findFirst().orElse(null);
+            if(project != null){
+                checkID = true;
+            }
+        }
+
+        ArrayList<String> opties = new ArrayList<String>();
+        opties.add("Naam");
+        opties.add("Beschrijving");
+        opties.add("Budget");
+        Menu.generateMenu(opties);
+
+        System.out.println("Welke data wilt u wijzigen? ");
+        int userInput = scanner.nextInt();
+        scanner.nextLine();
+
+        if(userInput == 1){
+            System.out.print("Naam veranderen naar -> ");
+            String newName = scanner.nextLine();
+            project.setProjectnaam(newName);
+
+            System.out.println("Naam gewijzigd naar " + newName);
+        }else if(userInput == 2){
+            System.out.print("Beschrijving veranderen naar -> ");
+            String newBeschrijving = scanner.nextLine();
+            project.setBeschrijving(newBeschrijving);
+
+            System.out.println("Beschrijving gewijzigd naar " + newBeschrijving);
+        }else if(userInput == 3){
+            System.out.print("Budget veranderen naar -> ");
+            int newBudget = scanner.nextInt();
+            scanner.nextLine();
+            project.setBudget(newBudget);
+
+            System.out.println("Budget gewijzigd naar " + newBudget);
+        }
     }
 
     public void urenDeclareren(){
@@ -136,6 +180,7 @@ public class ProjectManagementTool extends AbstractManagementTool{
     public void printOverzicht() {
         for(Project project: Main.projecten){
             System.out.println("(ID " + project.getProjectID() + ") " + project.getProjectnaam() + " | " + String.format("%.2f%% resterend", (project.getRestGeld() / project.getBudget() * 100)) + " | DEADLINE: " + project.getEinddatum());
+            System.out.println("       " + project.getBeschrijving());
         }
     }
 }
