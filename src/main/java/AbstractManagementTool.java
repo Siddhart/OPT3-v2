@@ -4,6 +4,12 @@ import java.util.Scanner;
 
 public abstract class AbstractManagementTool implements PrintInterface, WijzigInterface {
 
+
+    //class spliten en inlveren in herkansing map codesmells
+    //abstract template
+    //printer - wijziging
+    //klant - medewerker - project
+
     Checks checker = new Checks();
     public void start(){
         printMenu();
