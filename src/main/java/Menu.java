@@ -23,7 +23,7 @@ public class Menu{
             opties.add("Uren Declareren");
             opties.add("Sluit Applicatie");
 
-            Menu.generateMenu(opties);
+            Menu.generateMenu(opties, "--- Menu ---");
 
             handleGebruikerKeuze(opties.size());
         }
@@ -36,13 +36,16 @@ public class Menu{
 
         if(gekozenOptie == 1){
             kmt.printMenu();
-            kmt.krijgGebruikerInput();
+            int choice = kmt.krijgGebruikerInput();
+            kmt.voerGekozenOptieUit(choice);
         }else if(gekozenOptie == 2){
             mmt.printMenu();
-            mmt.krijgGebruikerInput();
+            int choice = mmt.krijgGebruikerInput();
+            mmt.voerGekozenOptieUit(choice);
         }else if(gekozenOptie == 3){
             pmt.printMenu();
-            pmt.krijgGebruikerInput();
+            int choice = pmt.krijgGebruikerInput();
+            pmt.voerGekozenOptieUit(choice);
         }else if(gekozenOptie == 4){
             pmt.urenDeclareren();
         }else if (gekozenOptie == l){
@@ -51,9 +54,10 @@ public class Menu{
     }
 
 
-    public static void generateMenu(ArrayList<String> opties){
+    public static void generateMenu(ArrayList<String> opties, String menuTitle){
         int optieCounter = 1;
         System.out.println("\n");
+        System.out.println(menuTitle);
         for (String optie : opties){
             System.out.println(optieCounter++ + ". " + optie);
         }

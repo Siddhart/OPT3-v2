@@ -11,7 +11,6 @@ public class Project implements Subject{
     private int klantID;
     private int managerID;
     private double budget;
-
     private double restGeld;
     private List<UrenDeclaratie> urenDeclaraties;
     private List<Observer> observers;

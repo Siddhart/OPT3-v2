@@ -1,7 +1,30 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class MedewerkerManagementTool extends AbstractManagementTool{
+public class MedewerkerManagementTool extends AbstractManagementTool implements WijzigInterface, PrintInterface{
+
+    public void voerGekozenOptieUit(int choice) {
+        switch (choice) {
+            case 1:
+                printOverzicht();
+                break;
+            case 2:
+                toevoegen();
+                break;
+            case 3:
+                verwijderen();
+                break;
+            case 4:
+                bijwerken();
+                break;
+            case 5:
+                break;
+            default:
+                krijgGebruikerInput();
+                break;
+        }
+    }
+
     @Override
     public void printMenu() {
         ArrayList<String> opties = new ArrayList<String>();
@@ -11,7 +34,7 @@ public class MedewerkerManagementTool extends AbstractManagementTool{
         opties.add("Medewerker Bewerker");
         opties.add("Terug Naar het overzicht");
 
-        Menu.generateMenu(opties);
+        Menu.generateMenu(opties, "--- Medewerkers Beheren ---");
     }
 
     @Override
@@ -93,7 +116,7 @@ public class MedewerkerManagementTool extends AbstractManagementTool{
         opties.add("Email");
         opties.add("Functie");
         opties.add("Uurtarief");
-        Menu.generateMenu(opties);
+        Menu.generateMenu(opties, "--- Gegevens Beheren ---");
 
         System.out.println("Welke data wilt u wijzigen? ");
         int userInput = scanner.nextInt();

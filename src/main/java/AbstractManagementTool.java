@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 
 
-public abstract class AbstractManagementTool implements PrintInterface, WijzigInterface {
+public abstract class AbstractManagementTool{
 
 
     //class spliten en inlveren in herkansing map codesmells
@@ -17,35 +17,16 @@ public abstract class AbstractManagementTool implements PrintInterface, WijzigIn
         printOverzicht();
     }
 
-
-    public void krijgGebruikerInput(){
+    public int krijgGebruikerInput(){
         Scanner scanner = new Scanner(System.in);
         System.out.print("Kies je optie: ");
         int choice = scanner.nextInt();
         scanner.nextLine();
 
-        voerGekozenOptieUit(choice);
+        return choice;
+//        voerGekozenOptieUit(choice);
     }
 
-    public void voerGekozenOptieUit(int choice) {
-        switch (choice) {
-            case 1:
-                printOverzicht();
-                break;
-            case 2:
-                toevoegen();
-                break;
-            case 3:
-                verwijderen();
-                break;
-            case 4:
-                bijwerken();
-                break;
-            case 5:
-                break;
-            default:
-                krijgGebruikerInput();
-                break;
-        }
-    }
+    public void printMenu(){};
+    public void printOverzicht(){};
 }

@@ -1,20 +1,42 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class KlantManagementTool extends AbstractManagementTool{
-    @Override
+public class KlantManagementTool extends AbstractManagementTool implements WijzigInterface, PrintInterface{
+
+    public void voerGekozenOptieUit(int choice) {
+        switch (choice) {
+            case 1:
+                printOverzicht();
+                break;
+            case 2:
+                toevoegen();
+                break;
+            case 3:
+                bijwerken();
+                break;
+            case 4:
+                verwijderen();
+                break;
+            case 5:
+                break;
+            default:
+                krijgGebruikerInput();
+                break;
+        }
+    }
+
     public void printMenu() {
         ArrayList<String> opties = new ArrayList<String>();
         opties.add("Klanten Overzicht");
         opties.add("Klanten Toevoegen");
-        opties.add("Klanten Verwijderen");
         opties.add("Klanten Bewerker");
+        opties.add("Klanten Verwijderen");
         opties.add("Terug Naar het overzicht");
 
-        Menu.generateMenu(opties);
+        Menu.generateMenu(opties, "--- Klanten Beheren ---");
     }
 
-    @Override
+
     public void toevoegen() {
         Scanner scanner = new Scanner(System.in);
         int klantID = Main.klanten.size() + 1;
@@ -82,7 +104,7 @@ public class KlantManagementTool extends AbstractManagementTool{
         opties.add("Naam");
         opties.add("Email");
         opties.add("Telefoonnummer");
-        Menu.generateMenu(opties);
+        Menu.generateMenu(opties, "--- Gegevens Beheren ---");
 
         System.out.println("Welke data wilt u wijzigen? ");
         int userInput = scanner.nextInt();

@@ -1,20 +1,43 @@
-import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ProjectManagementTool extends AbstractManagementTool{
+public class ProjectManagementTool extends AbstractManagementTool implements WijzigInterface, PrintInterface{
+
+    public void voerGekozenOptieUit(int choice) {
+        switch (choice) {
+            case 1:
+                printOverzicht();
+                break;
+            case 2:
+                bijwerken();
+                break;
+            case 3:
+                verwijderen();
+                break;
+            case 4:
+                toevoegen();
+                break;
+            case 5:
+                break;
+            default:
+                krijgGebruikerInput();
+                break;
+        }
+    }
+
+
     @Override
     public void printMenu() {
         ArrayList<String> opties = new ArrayList<String>();
         opties.add("Projecten Overzicht");
+        opties.add("Project Bewerker");
         opties.add("Project Toevoegen");
         opties.add("Project Verwijderen");
-        opties.add("Project Bewerker");
         opties.add("Terug Naar het overzicht");
 
-        Menu.generateMenu(opties);
+        Menu.generateMenu(opties, "--- Projecten Beheren ---");
     }
 
     @Override
@@ -111,7 +134,7 @@ public class ProjectManagementTool extends AbstractManagementTool{
         opties.add("Naam");
         opties.add("Beschrijving");
         opties.add("Budget");
-        Menu.generateMenu(opties);
+        Menu.generateMenu(opties, "--- Gegevens Beheren ---");
 
         System.out.println("Welke data wilt u wijzigen? ");
         int userInput = scanner.nextInt();
