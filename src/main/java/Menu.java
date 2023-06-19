@@ -35,16 +35,13 @@ public class Menu{
         scanner.nextLine();
 
         if(gekozenOptie == 1){
-            kmt.printMenu();
-            int choice = kmt.krijgGebruikerInput();
+            int choice = kmt.start();
             kmt.voerGekozenOptieUit(choice);
         }else if(gekozenOptie == 2){
-            mmt.printMenu();
-            int choice = mmt.krijgGebruikerInput();
+            int choice = mmt.start();
             mmt.voerGekozenOptieUit(choice);
         }else if(gekozenOptie == 3){
-            pmt.printMenu();
-            int choice = pmt.krijgGebruikerInput();
+            int choice = pmt.start();
             pmt.voerGekozenOptieUit(choice);
         }else if(gekozenOptie == 4){
             pmt.urenDeclareren();

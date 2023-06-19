@@ -14,10 +14,10 @@ public class ProjectManagementTool extends AbstractManagementTool implements Wij
                 bijwerken();
                 break;
             case 3:
-                verwijderen();
+                toevoegen();
                 break;
             case 4:
-                toevoegen();
+                verwijderen();
                 break;
             case 5:
                 break;
